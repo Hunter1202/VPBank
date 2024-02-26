@@ -1,101 +1,148 @@
-const storedBLogs = localStorage.getItem('blog');
-const blog = storedBLogs ? JSON.parse(storedBLogs) : [];
+// Retrieve existing user data from localStorage on page load
+const storedUsers = localStorage.getItem('users');
+const users = storedUsers ? JSON.parse(storedUsers) : [];
 
-function addBlogForm() {
-    // Create the form elements with Bootstrap classes
-    const formHtml = `
-        <form id="addBlogForm" class="mt-4">
-            <div class="form-group">
-                <label for="newTitle">Tiêu đề:</label>
-                <input type="text" id="newTitle" class="form-control" placeholder="Tiêu đề bài viết" required onfocus>
-            </div>
-
-            <div class="form-group">
-                <label for="newContent">Nội dung:</label>
-                <textarea id="newContent" class="form-control" rows="4" placeholder="Nội dung bài viết"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="newDate">Ngày đăng:</label>
-                <input type="datetime-local" id="newDate" class="form-control" placeholder="Ngày đăng">
-            </div>
-
-            <div class="form-group">
-                <label for="newImage">URL ảnh:</label>
-                <input type="text" id="newImage" class="form-control" placeholder="img/vanhoa2.jpeg">
-            </div>
-            
-            <div class="form-group text-center">
-                <button class="btn btn-success" type="button" onclick="saveBlog()">Lưu</button>
-            </div>
-        </form>
-    `;
-
-    // Replace the content inside the admConfiguration div
-    document.getElementById("admConfiguration").innerHTML = formHtml;
+function setCurrentUser(user) {
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
 }
 
-let blogId = 0;
-function saveBlog() {
-    blogId++;
-    let title = document.getElementById('newTitle').value;
-    let content = document.getElementById('newContent').value;
-    let date = document.getElementById('newDate').value;
-    let image = document.getElementById('newImage').value;
+// get the current user from sessionStorage
+function getCurrentUser() {
+    const currentUser = sessionStorage.getItem('currentUser');
+    return currentUser ? JSON.parse(currentUser) : null;
+}
 
-    // Check if the number of blogs is greater than or equal to the limit (3)
-    if (blog.length >= 3) {
-        // Remove the oldest blog (the one at index 0)
-        blog.shift();
+function register() {
+    let username = document.getElementById('registerUsername').value;
+    let password = document.getElementById('registerPassword').value;
+    let passwordMatch = document.getElementById('registerPassword-2').value;
+    let permit = 0;
+    let type = 'user';
+    if (username.toLowerCase() === "admin") {
+        type = 'admin';
+    } else {
+        type = 'user';
     }
 
-    blog.push({ blogId, image, date, title, content});
-    localStorage.setItem('blog', JSON.stringify(blog));
-    alert('Thêm blog mới thành công!');
+    // Check if the username is already taken
+    if (users.find(user => user.username === username)) {
+        alert('Tài khoản đã được sử dụng');
+        return;
+    } if (password !== passwordMatch) {
+        alert('Mật khẩu không trùng khớp');
+        return;
+    } else {
+        // Add the new user to the simulated database
+        users.push({username, password, permit, type});
 
-    // Clear the form or perform other actions after submission
-    document.getElementById("addBlogForm").reset();
+        // Update localStorage with the new user data
+        localStorage.setItem('users', JSON.stringify(users));
+
+        alert('Đăng ký tài khoản thành công! Xin mời đăng nhập.');
+        window.location.href = "login.html";
+    }
 }
 
-function manageBlog() {
-    const blogConfig = document.getElementById('admConfiguration');
-    blogConfig.innerHTML = '';
+function login() {
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
 
-    const blogTable = document.createElement('table');
-    blogTable.className = 'table table-bordered table-striped';
+    const user = users.find(user => user.username === username);
 
+    if (user && user.password === password) {
+        // Set the current user in sessionStorage
+        setCurrentUser(user);
+
+        // Check if the username is "admin" and redirect accordingly
+        if (username.toLowerCase() === "admin") {
+            // Redirect to admin.html if the username is "admin"
+            window.location.href = "admin.html";
+        } else {
+            // Redirect to index.html for other users
+            window.location.href = "index.html";
+        }
+    } else {
+        alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+    }
+}
+
+function isLoggedIn() {
+    return getCurrentUser() !== null;
+}
+
+// Call the displayLoggedInUser function on loggedin.html page load
+document.addEventListener('DOMContentLoaded', () => {
+    displayLoggedInUser();
+    updateLoginButton();
+});
+
+
+function displayLoggedInUser() {
+    const loggedInUserDiv = document.getElementById('loggedInUser');
+    const currentUser = getCurrentUser();
+
+    if (currentUser) {
+        // loggedInUserDiv.textContent = `Chào mừng, ${currentUser.username}`;
+    } else {
+        loggedInUserDiv.textContent = ''; // Clear the content if no user is logged in
+    }
+}
+function updateLoginButton() {
+    const loginButton = document.getElementById('loginButton');
+
+    if (isLoggedIn()) {
+        // If the user is logged in, change the button to "Đăng xuất"
+        loginButton.innerHTML = '<button class="btn" onclick="logout()">Đăng xuất</button>';
+    } else {
+        // If the user is not logged in, keep the button as "Đăng nhập"
+        loginButton.innerHTML = '<a href="login.html" class="btn">Đăng nhập</a>';
+    }
+}
+function logout() {
+    sessionStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+}
+
+function displayUserConfiguration() {
+    // Get the container element to display user information
+    const userConfigContainer = document.getElementById('admConfiguration');
+
+    // Clear existing content
+    userConfigContainer.innerHTML = '';
+
+    // Create a table element
+    const userTable = document.createElement('table');
+    userTable.className = 'table table-bordered table-striped';
+
+    // Create table header
     const tableHeader = document.createElement('thead');
     tableHeader.innerHTML = `
         <tr>
-            <th scope="col">Id bài viết</th>
-            <th scope="col">Tiêu đề</th>
-            <th scope="col">Nội dung</th>
-            <th scope="col">Ngày đăng</th>
-            <th scope="col">Ảnh</th>
+            <th scope="col">Tên đăng nhập</th>
+            <th scope="col">Mật khẩu</th>
+            <th scope="col">Quyền truy cập</th>
+            <th scope="col">Cấp User</th>
             <th scope="col">Thao tác</th>
         </tr>
     `;
-    blogTable.appendChild(tableHeader);
+    userTable.appendChild(tableHeader);
 
     // Create table body
     const tableBody = document.createElement('tbody');
 
-    // Populate the table with blog list
-    blog.forEach((blog, i) => {
+    // Populate the table with user accounts
+    users.forEach(user => {
         const tableRow = document.createElement('tr');
         tableRow.innerHTML = `
-            <td>${i + 1}</td>
-            <td>${blog.title}</td>
-            <td>${blog.content}</td>
-            <td>${blog.date}</td>
+            <td>${user.username}</td>
+            <td>${user.password}</td>
+            <td>${user.permit}</td>
+            <td>${user.type}</td>
             <td>
-                <img src="${blog.image}" alt="Blog Image" style="max-width: 100px; max-height: 100px;">
-            </td>
-            <td>
-                <button class="btn btn-success btn-sm" onclick="editBlog(${blog.blogId})">
+                <button class="btn btn-success btn-sm" onclick="editUser('${user.username}')">
                     <i class="fa-solid fa-pen-to-square"></i> Sửa
                 </button>
-                <button class="btn btn-danger btn-sm" onclick="deleteBlog('${blog.title}')">
+                <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.username}')">
                     <i class="fa-solid fa-trash"></i> Xóa
                 </button>
             </td>
@@ -103,84 +150,87 @@ function manageBlog() {
         tableBody.appendChild(tableRow);
     });
 
-    blogTable.appendChild(tableBody);
+    userTable.appendChild(tableBody);
 
-    blogConfig.appendChild(blogTable);
-    blogConfig.style.display = 'block';
+    // Append the table to the user configuration section
+    userConfigContainer.appendChild(userTable);
+    userConfigContainer.style.display = 'block';
 }
 
-function deleteBlog(title) {
-    // Find the index of the blog with the specified title
-    const index = blog.findIndex(blog => blog.title === title);
 
-    if (index !== -1) {
-        // Remove the blog from the array
-        blog.splice(index, 1);
+function deleteUser(username) {
+    // Find the index of the user in the array
+    const userIndex = users.findIndex(user => user.username === username);
 
-        // Update local storage with the modified blog array
-        localStorage.setItem('blog', JSON.stringify(blog));
+    if (userIndex !== -1) {
+        // Remove the user from the array
+        users.splice(userIndex, 1);
 
-        manageBlog();
+        // Update the local storage with the modified user array
+        localStorage.setItem('users', JSON.stringify(users));
 
-        alert('Xoá thành công !');
+        // After deleting, update the displayed user information
+        displayUserConfiguration();
     } else {
-        alert('Không tìm thấy Blog');
+        alert('User not found');
     }
 }
 
-// Function to populate the form for editing a blog
-function editBlog(id) {
-    // Retrieve the blog data using the index
-    const blogToEdit = blog.find(blog => blog.blogId === id);
+function editUser(username) {
+    // Find the user with the specified username
+    const user = users.find(user => user.username === username);
 
-    if (blogToEdit) {
-        // Set editingIndex to the index of the blog being edited
-        editingIndex = blog.findIndex(blog => blog.blogId === id);
-
-        // Populate the form fields with existing blog data
-        document.getElementById('newTitle').value = blogToEdit.title;
-        document.getElementById('newContent').value = blogToEdit.content;
-        document.getElementById('newDate').value = blogToEdit.date;
-        document.getElementById('newImage').value = blogToEdit.image;
+    if (user) {
+        // Populate the form fields with user information
+        document.getElementById('editUsername').value = user.username;
+        document.getElementById('editPassword').value = user.password;
+        document.getElementById('editUsername').value = user.permit;
+        document.getElementById('editUsername').value = user.type;
 
         // Open the edit user modal
-        $('#editBlogModal').modal('show');
+        $('#editUserModal').modal('show');
     } else {
-        alert('Không tìm thấy blog');
+        alert('Không tìm thấy người dùng');
     }
 }
 
-//update blog after finish modal form
-function updateBlog() {
-    if (editingIndex !== -1) {
-        // Retrieve updated values from the form
-        const updatedTitle = document.getElementById('newTitle').value;
-        const updatedContent = document.getElementById('newContent').value;
-        const updatedDate = document.getElementById('newDate').value;
-        const updatedImage = document.getElementById('newImage').value;
+// Add a new function to handle updating the user
+function updateUser() {
+    // Get the updated user information from the form fields
+    const updatedUsername = document.getElementById('editUsername').value;
+    const updatedPassword = document.getElementById('editPassword').value;
+    const updatedPermit = document.getElementById('editPermit').value;
+    const updatedType = document.getElementById('editType').value;
 
-        // Update the blog data at the specified index
-        blog[editingIndex].title = updatedTitle;
-        blog[editingIndex].content = updatedContent;
-        blog[editingIndex].date = updatedDate;
-        blog[editingIndex].image = updatedImage;
+    // Find the index of the user in the array
+    const userIndex = users.findIndex(user => user.username === updatedUsername);
 
-        // Update local storage with the modified blog array
-        localStorage.setItem('blog', JSON.stringify(blog));
+    if (userIndex !== -1) {
+        // Update the user information in the array
+        users[userIndex] = {
+            username: updatedUsername,
+            password: updatedPassword,
+            permit: updatedPermit,
+            type: updatedType,
+        };
 
-        editingIndex = -1;
+        // Update the local storage with the modified user array
+        localStorage.setItem('users', JSON.stringify(users));
 
         // After updating, close the modal
-        $('#editBlogModal').modal('hide');
+        $('#editUserModal').modal('hide');
 
-        // Re-render the blog table
-        manageBlog();
-
-        alert('Cập nhật blog thành công!');
+        // After updating, update the displayed user information
+        displayUserConfiguration();
     } else {
-        alert('Cập nhật blog lỗi!');
+        alert('Không tìm thấy người dùng ');
     }
 }
+
+function navigateToIndex() {
+    window.location.href = 'index.html';
+}
+
 
 // read the search input
 document.querySelector('#searchInput').addEventListener('input', performSearch);
@@ -268,37 +318,3 @@ function updateConfigurationDiv(results) {
     configContainer.appendChild(table);
     configContainer.style.display = 'block';
 }
-
-function displayBlogs() {
-    const blogListContainer = document.getElementById("blogList");
-
-    blogListContainer.innerHTML = "";
-
-    // Iterate through blogData and create HTML for each blog
-    blog.forEach((blog, index) => {
-        const blogHTML = `
-      <div class="col-lg-4 col-md-6 col-12">
-        <div class="single-news">
-          <div class="news-head">
-            <img src="${blog.image}" alt="#">
-          </div>
-          <div class="news-body">
-            <div class="news-content">
-              <div class="date">${blog.date}</div>
-              <h2><a href="">${blog.title}</a></h2>
-              <p class="text">${blog.content}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-
-        // Append the blog HTML to the container
-        blogListContainer.innerHTML += blogHTML;
-    });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Display the blogs on page load
-    displayBlogs();
-});
