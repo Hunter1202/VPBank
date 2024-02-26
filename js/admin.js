@@ -231,27 +231,90 @@ function navigateToIndex() {
     window.location.href = 'index.html';
 }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Dummy data (replace with actual data)
-//     const dummyData = [
-//         { image: "img/vanhoa1.jpeg", date: "22 Aug, 2020", title: "We have annnocuced our new product.", content: "Lorem Ipsum Dolor A Sit Ameti, Consectetur Adipisicing Elit, Sed Do Eiusmod Tempor Incididunt Sed Do Incididunt Sed." },
-//         { image: "img/vanhoa2.jpeg", date: "15 Jul, 2020", title: "Top five way for solving teeth problems.", content: "Lorem Ipsum Dolor A Sit Ameti, Consectetur Adipisicing Elit, Sed Do Eiusmod Tempor Incididunt Sed Do Incididunt Sed." },
-//         { image: "img/vanhoa3.jpeg", date: "15 Jul, 2020", title: "We provide highly business soliutions.", content: "Lorem Ipsum Dolor A Sit Ameti, Consectetur Adipisicing Elit, Sed Do Eiusmod Tempor Incididunt Sed Do Incididunt Sed." },
-//     ];
-//
-//     // Populate the blogData array with dummy data
-//     blogData = dummyData;
-//
-//     // Display the blogs on page load
-//     displayBlogs();
-// });
 
+// read the search input
+document.querySelector('#searchInput').addEventListener('input', performSearch);
 
+//  perform combined search for both users and blogs
+function performSearch() {
+    // read the search input value
+    const searchInput = document.querySelector('#searchInput').value.toLowerCase();
 
+    // Filter blogs based on the search input
+    const filteredBlogs = blog.filter(blog =>
+        blog.title.toLowerCase().includes(searchInput) ||
+        blog.content.toLowerCase().includes(searchInput) ||
+        blog.date.includes(searchInput) ||
+        blog.image.toLowerCase().includes(searchInput)
+    );
 
+    // Filter based on search input
+    const filteredUsers = users.filter(user =>
+        user.username.toLowerCase().includes(searchInput) ||
+        user.permit.toString().includes(searchInput) ||
+        user.type.toLowerCase().includes(searchInput)
+    );
 
+    // Merge filtered blogs and users
+    const combinedResults = [...filteredBlogs, ...filteredUsers];
 
+    // call Update admConfiguration
+    updateConfigurationDiv(combinedResults);
+}
 
+// Function to update admConfiguration div with combined results
+function updateConfigurationDiv(results) {
+    const configContainer = document.getElementById('admConfiguration');
+    configContainer.innerHTML = '';
 
+    const table = document.createElement('table');
+    table.className = 'table table-bordered table-striped';
 
+    const tableHeader = document.createElement('thead');
+    tableHeader.innerHTML = `
+        <tr>
+            <th scope="col">Id bài viết / Tên đăng nhập</th>
+            <th scope="col">Tiêu đề / Mật khẩu</th>
+            <th scope="col">Nội dung / Quyền truy cập</th>
+            <th scope="col">Ngày đăng / Cấp User</th>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Thao tác</th>
+        </tr>
+    `;
+    table.appendChild(tableHeader);
 
+    const tableBody = document.createElement('tbody');
+
+    results.forEach(result => {
+        const tableRow = document.createElement('tr');
+        tableRow.innerHTML = `
+            <td>${result.blogId || ''} ${result.username || ''}</td>
+            <td>${result.title || ''} ${result.password || ''}</td>
+            <td>${result.content || ''} ${result.permit || ''}</td>
+            <td>${result.date || ''} ${result.type || ''}</td>
+            <td>
+                ${result.image ? `<img src="${result.image}" alt="Image" style="max-width: 100px; max-height: 100px;">` : ''}
+            </td>
+            <td>
+                ${result.blogId ? `<button class="btn btn-success btn-sm" onclick="editBlog(${result.blogId})">
+                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </button>` : ''}
+                ${result.username ? `<button class="btn btn-success btn-sm" onclick="editUser('${result.username}')">
+                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </button>` : ''}
+                ${result.blogId ? `<button class="btn btn-danger btn-sm" onclick="deleteBlog('${result.title}')">
+                    <i class="fa-solid fa-trash"></i> Xóa
+                </button>` : ''}
+                ${result.username ? `<button class="btn btn-danger btn-sm" onclick="deleteUser('${result.username}')">
+                    <i class="fa-solid fa-trash"></i> Xóa
+                </button>` : ''}
+            </td>
+        `;
+        tableBody.appendChild(tableRow);
+    });
+
+    table.appendChild(tableBody);
+
+    configContainer.appendChild(table);
+    configContainer.style.display = 'block';
+}
