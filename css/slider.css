@@ -1,0 +1,100 @@
+/*===========================
+	Start Hero Area CSS
+=============================*/
+.slider-2 .single-slider-2 {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat:no-repeat;
+    justify-content: center;
+}
+.slider-2 .single-slider-2 .text{
+    margin-top:120px;
+}
+.slider-2.index2 .single-slider-2 .text{
+    margin-top:150px;
+}
+.slider-2 .single-slider-2 h1 {
+    color: #2C2D3F;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    line-height: 42px;
+}
+.slider-2 .single-slider-2 h1 span{
+    color:#00b74f;
+}
+.slider-2 .single-slider-2 p {
+    color: #000000;
+    margin-top: 27px;
+    font-weight: 400;
+}
+.slider-2 .single-slider-2 .button{
+    margin-top:30px;
+}
+.slider-2 .single-slider-2 .btn{
+    color:#fff;
+    background:#00b74f;
+    font-weight:500;
+    display:inline-block;
+    margin:0;
+    margin-right:10px;
+}
+.slider-2 .single-slider-2 .btn:last-child{
+    margin:0;
+}
+.slider-2 .single-slider-2 .btn.primary{
+    background:#2C2D3F;
+    color:#fff;
+}
+.slider-2 .single-slider-2 .btn.primary:before{
+    background:#00b74f;
+}
+.slider-2 .owl-carousel .owl-nav {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top:-25px;
+}
+.slider-2 .owl-carousel .owl-nav div {
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #00b74f;
+    color: #fff;
+    font-size: 26px;
+    position: absolute;
+    margin: 0;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    padding: 0;
+    border-radius: 50%;
+}
+.slider-2 .owl-carousel .owl-nav div:hover{
+    background:#2C2D3F;
+    color:#fff;
+}
+.slider-2 .owl-carousel .owl-controls .owl-nav .owl-prev{
+    left:20px;
+}
+.slider-2 .owl-carousel .owl-controls .owl-nav .owl-next{
+    right:20px;
+}
+
+/* slider-2 Animation */
+.owl-item.active .single-slider-2 h1{
+    animation: fadeInUp 1s both 0.6s;
+}
+.owl-item.active .single-slider-2 p{
+    animation: fadeInUp 1s both 1s;
+}
+.owl-item.active .single-slider-2 .button{
+    animation: fadeInDown 1s both 1.5s;
+}
+/*===========================
+	End Hero Area CSS
+=============================*/
