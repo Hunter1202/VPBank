@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .diagram-row {
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            margin-top: 50px;
+        }
+
+        .diagram-block {
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+        }
+
+        .diagram-block h2 {
+            background-color: #0f5c86; /* Blue background */
+            color: white; /* White text */
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+            margin-top: ;
+        }
+
+        .diagram-sub-block {
+            background-color: #cccccc; /* Gray background */
+            color: black; /* Black text */
+            padding: 10px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        .diagram-header {
+            background-color: rgb(79, 88, 148);
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 24px; /* Cỡ chữ lớn hơn */
+            font-weight: bold; /* Chữ đậm */
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Lines for connecting blocks, need to adjust based on layout */
+        .line-horizontal {
+            border-top: 2px solid black;
+            width: 80%;
+            height: 2px;
+            background-color: #000;
+            margin: 0 auto;
+
+        }
+
+        .line-vertical {
+            border-left: 2px solid black;
+            height: 20px;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="Site keywords here" />
+    <meta name="description" content="" />
+    <meta name="copyright" content="" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Trang quản trị viên </title>
+    <link rel="icon" href="img/Icon-VPBank.png" />
+    <!-- Favicon -->
+    <link rel="icon" href="img/Icon-VPBank.png" />
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="./css/nice-select.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css" />
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="./css/icofont.css" />
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="./css/slicknav.min.css" />
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="./css/owl-carousel.css" />
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="./css/datepicker.css" />
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="./css/animate.min.css" />
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="./css/magnific-popup.css" />
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/admin.css" />
+    <style>
+        /* Add custom CSS if necessary */
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div id="header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+    <div>
+        <img src="./img/logoEDA.png" style="width: 50%" />
+    </div>
+    <div>
+        <div>
+            <!-- Menu icon for the dropdown menu -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="index.html">Trang chủ</a>
+                    <a class="dropdown-item" href="Gioithieu.html">Giới thiệu</a>
+                    <a class="dropdown-item" href="faq.html">Q&A</a>
+                    <a class="dropdown-item" href="Lienhe.html">Liên hệ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<nav id="sidebar">
+    <ul class="nav flex-column">
+        <li class="nav-item option" onclick="navigateToIndex()">
+            <i class="fas fa-home"></i>
+            <span>Trang chủ</span>
+        </li>
+
+        <li class="nav-item option" onclick="displayUserConfiguration()">
+            <i class="fas fa-user"></i>
+            <span>Cấu hình User</span>
+        </li>
+        <li class="nav-item option" onclick="addBlogForm()">
+            <i class="fa-solid fa-blog"></i>
+            <span>Thêm tin tức</span>
+        </li>
+        <li class="nav-item option" onclick="manageBlog()">
+            <i class="fas fa-file-alt"></i>
+            <span>Quản trị tin tức</span>
+        </li>
+<!--        <li class="nav-item option" onclick="manageBlogs()">-->
+<!--            <i class="fas fa-desktop"></i>-->
+<!--            <span>Quản trị giao diện</span>-->
+<!--        </li>-->
+        <li class="nav-item option" onclick="logout()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Đăng xuất</span>
+        </li>
+    </ul>
+</nav>
+
+<!-- Main Content -->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="content">
+    <div class="search-bar">
+        <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm...">
+    </div>
+
+
+    <div class="main-content">
+        <!-- main content goes here -->
+        <div id="admConfiguration"></div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="./js/admin.js"></script>
+<script src="./js/blog.js"></script>
+
+
+</body>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa thông tin User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="editUsername">Tên đăng nhập:</label>
+                <input type="text" id="editUsername" class="form-control">
+                <label for="editPassword">Mật khẩu:</label>
+                <input type="text" id="editPassword" class="form-control">
+                <label for="editPermit">Quyền:</label>
+                <input type="text" id="editPermit" class="form-control">
+                <label for="editType">Cấp User:</label>
+                <input type="text" id="editType" class="form-control">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updateUser()">Lưu</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editBlogModal" tabindex="-1" role="dialog" aria-labelledby="editBlogModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBlogModalLabel">Chỉnh sửa Blog</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="newTitle">Tiêu đề:</label>
+                <input type="text" id="newTitle" class="form-control">
+                <label for="newContent">Nội dung:</label>
+                <input type="text" id="newContent" class="form-control">
+                <label for="newDate">Ngày đăng tải:</label>
+                <input type="date" id="newDate" class="form-control">
+                <label for="newImage">URL ảnh:</label>
+                <input type="text" id="newImage" class="form-control">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updateBlog()">Lưu</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

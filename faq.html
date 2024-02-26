@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="Site keywords here" />
+    <meta name="description" content="" />
+    <meta name="copyright" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Title -->
+    <title>Q&A - Khối quản trị và phân tích dữ liệu</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/Icon-VPBank.png" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="./css/nice-select.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css" />
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="./css/icofont.css" />
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="./css/slicknav.min.css" />
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="./css/owl-carousel.css" />
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="./css/datepicker.css" />
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="./css/animate.min.css" />
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="./css/magnific-popup.css" />
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <script src="js/admin.js"></script>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="loader">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+        <div class="indicator">
+          <svg width="16px" height="12px">
+            <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline
+              id="front"
+              points="1 6 4 6 6 11 10 1 12 6 15 6"
+            ></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- Header Area -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Create a synchronous XMLHttpRequest to fetch the header content
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "header.html", false); // false makes the request synchronous
+        xhr.send(null);
+
+        // Check if the request was successful
+        if (xhr.status === 200) {
+          // Inject the header content into the desired location
+          document.body.insertAdjacentHTML("afterbegin", xhr.responseText);
+
+          // After inserting the header, call the functions to handle login button
+          displayLoggedInUser();
+          updateLoginButton();
+        }
+      });
+    </script>
+      <!--/ End Header Inner -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Slider Area -->
+    <section class="slider" style="margin-bottom: 70px;">
+			<div class="hero-slider">
+				<!-- Start Single Slider -->
+				<div class="single-slider" style="background-image:url('img/slider.jpg')">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="text">
+									<h1>World Class BI <span>AI Services</span> </h1>
+									<p>Drive enterprise data architecture, build strong foundation and structured data systems for leveraging trusted data in driving business outcomes </p>
+									<p> Thúc đẩy kiến trúc dữ liệu doanh nghiệp, xây dựng nền tảng vững chắc và hệ thống dữ liệu có cấu trúc để tận dụng dữ liệu đáng tin cậy nhằm thúc đẩy kết quả kinh doanh </p>
+									<div class="button">
+										<a href="#" class="btn">Khám phá ngay</a>
+										<a href="#" class="btn">Liên hệ với chúng tôi</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Single Slider -->
+				<!-- Start Single Slider -->
+				<div class="single-slider" style="background-image:url('img/slider2.jpg')">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="text">
+									<h1>We Provide <span>Data Services</span> That You Can <span>Trust!</span></h1>
+									<p>Develop strategy to deepen the application of diagnostic & predictive analytics across customer journey and business processes </p>
+									<p> Phát triển chiến lược để tăng cường ứng dụng phân tích chẩn đoán và dự đoán trong hành trình của khách hàng và quy trình kinh doanh </p>
+									<div class="button">
+										<a href="index.html" class="btn">Khám phá ngay</a>
+										<a href="Lienhe.html" class="btn">Liên hệ với chúng tôi</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Start End Slider -->
+				<!-- Start Single Slider -->
+				<div class="single-slider" style="background-image:url('img/slider3.1.jpg')">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+                <div class="text">
+									<h1>We Provide <span>Data Services</span> That You Can <span>Trust!</span></h1>
+									<p>Develop group strategy and provide oversight on data and analytics practices across the ecosystem subsidiaries to drive economies of scale</p>
+									<p> Phát triển chiến lược và cung cấp sự giám sát về thực hành dữ liệu và phân tích trên các công ty con trong hệ sinh thái để thúc đẩy tính kinh tế theo quy mô </p>
+									<div class="button">
+										<a href="#" class="btn">Khám phá ngay</a>
+										<a href="#" class="btn">Liên hệ với chúng tôi</a>
+									</div>
+								</div>
+							</div>
+				<!-- End Single Slider -->
+			</div>
+		</section>
+    <!--/ End Slider Area -->
+    <!-- Start breakcoumb Area -->
+    <section>
+      <div class="breakcomb-container container mt-3">
+        <div class="breakcomb row">
+          <div class="breakcomb-title col-6">
+            <h3>Câu hỏi thường gặp</h3>
+          </div>
+          <div class="search-bar col-6">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="px-3 form-control"
+                placeholder="Tìm kiếm"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End breakcoumb Area -->
+    <!-- FAQ Area -->
+
+    <section>
+      <div class="container my-3">
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+
+          <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+              <div class="mb-0">
+                <a
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        href="#collapseOne"
+                        aria-expanded="false"
+                        aria-controls="collapseOne"
+                        class="collapsed d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <div class="ml-5">
+                      <h3>Câu hỏi chung</h3>
+                      <p>Câu hỏi thường gặp về chương trình đào tạo AWS cơ bản</p>
+                    </div>
+                  </div>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div
+                    id="collapseOne"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingOne"
+                    aria-expanded="false"
+            >
+              <div class="card-block">
+                <p> AWS là gì?</p>
+                <p> AWS là một dịch vụ đám mây của Amazon cung cấp các dịch vụ tính toán, lưu trữ, ...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" role="tab" id="headingTwo">
+              <div class="mb-0">
+                <a
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        href="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
+                        class="collapsed d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <div class="ml-5">
+                      <h3>CLorem ipsum dolor sit amet</h3>
+                      <p>Lorem ipsum dolor sit amet</p>
+                    </div>
+                  </div>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div
+                    id="collapseTwo"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="headingTwo"
+                    aria-expanded="false"
+            >
+              <div class="card-block">
+                <p> AWS là gì?</p>
+                <p> AWS là một dịch vụ đám mây của Amazon cung cấp các dịch vụ tính toán, lưu trữ, ...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" role="tab" id="heading3">
+              <div class="mb-0">
+                <a
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        href="#collapse3"
+                        aria-expanded="false"
+                        aria-controls="collapse3"
+                        class="collapsed d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <div class="ml-5">
+                      <h3>CLorem ipsum dolor sit amet</h3>
+                      <p>Lorem ipsum dolor sit amet</p>
+                    </div>
+                  </div>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div
+                    id="collapse3"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="heading3"
+                    aria-expanded="false"
+            >
+              <div class="card-block">
+                <p> AWS là gì?</p>
+                <p> AWS là một dịch vụ đám mây của Amazon cung cấp các dịch vụ tính toán, lưu trữ, ...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" role="tab" id="heading4">
+              <div class="mb-0">
+                <a
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        href="#collapse4"
+                        aria-expanded="false"
+                        aria-controls="collapse4"
+                        class="collapsed d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <div class="ml-5">
+                      <h3>CLorem ipsum dolor sit amet</h3>
+                      <p>Lorem ipsum dolor sit amet</p>
+                    </div>
+                  </div>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div
+                    id="collapse4"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="heading4"
+                    aria-expanded="false"
+            >
+              <div class="card-block">
+                <p> AWS là gì?</p>
+                <p> AWS là một dịch vụ đám mây của Amazon cung cấp các dịch vụ tính toán, lưu trữ, ...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" role="tab" id="heading5">
+              <div class="mb-0">
+                <a
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        href="#collapse5"
+                        aria-expanded="false"
+                        aria-controls="collapse5"
+                        class="collapsed d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <div class="ml-5">
+                      <h3>CLorem ipsum dolor sit amet</h3>
+                      <p>Lorem ipsum dolor sit amet</p>
+                    </div>
+                  </div>
+                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div
+                    id="collapse5"
+                    class="collapse"
+                    role="tabpanel"
+                    aria-labelledby="heading5"
+                    aria-expanded="false"
+            >
+              <div class="card-block">
+                <p> AWS là gì?</p>
+                <p> AWS là một dịch vụ đám mây của Amazon cung cấp các dịch vụ tính toán, lưu trữ, ...</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- End FAQ Area -->
+
+    <!--    footer start-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Create a synchronous XMLHttpRequest to fetch the header content
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "footer.html", false); // false makes the request synchronous
+        xhr.send(null);
+
+        // Check if the request was successful
+        if (xhr.status === 200) {
+          // Inject the header content into the desired location
+          document.body.insertAdjacentHTML("beforeend", xhr.responseText);
+
+        }
+      });
+    </script>
+    <!--    end of footer-->
+
+    <!-- jquery Min JS -->
+    <script src="./js/jquery.min.js"></script>
+    <!-- jquery Migrate JS -->
+    <script src="./js/jquery-migrate-3.0.0.js"></script>
+    <!-- jquery Ui JS -->
+    <script src="./js/jquery-ui.min.js"></script>
+    <!-- Easing JS -->
+    <script src="./js/easing.js"></script>
+    <!-- Color JS -->
+    <script src="./js/colors.js"></script>
+    <!-- Popper JS -->
+    <script src="./js/popper.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script src="./js/bootstrap-datepicker.js"></script>
+    <!-- Jquery Nav JS -->
+    <script src="./js/jquery.nav.js"></script>
+    <!-- Slicknav JS -->
+    <script src="./js/slicknav.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="./js/jquery.scrollUp.min.js"></script>
+    <!-- Niceselect JS -->
+    <script src="./js/niceselect.js"></script>
+    <!-- Tilt Jquery JS -->
+    <script src="./js/tilt.jquery.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="./js/owl-carousel.js"></script>
+    <!-- counterup JS -->
+    <script src="./js/jquery.counterup.min.js"></script>
+    <!-- Steller JS -->
+    <script src="./js/steller.js"></script>
+    <!-- Wow JS -->
+    <script src="./js/wow.min.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="./js/jquery.magnific-popup.min.js"></script>
+    <!-- Counter Up CDN JS -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="./js/bootstrap.min.js"></script>
+    <!-- Main JS -->
+    <script src="./js/main.js"></script>
+  </body>
+</html>
